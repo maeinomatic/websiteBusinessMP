@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+body {
+  @apply bg-dark text-white;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-darkCard;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-full hover:bg-accent;
+}
+
+/* Smooth animations */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 xs:px-5 xs:py-2.5 sm:px-6 sm:py-3 bg-accent text-dark font-semibold rounded-lg hover:bg-blue-400 transition-all duration-300 transform hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 xs:px-5 xs:py-2.5 sm:px-6 sm:py-3 border-2 border-accent text-accent font-semibold rounded-lg hover:bg-accent hover:text-dark transition-all duration-300 active:scale-95;
+  }
+
+  .section-title {
+    @apply text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-center;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent;
+  }
+
+  .card-dark {
+    @apply bg-darkCard rounded-lg p-4 sm:p-6 border border-primary border-opacity-20 hover:border-opacity-50 transition-all duration-300;
+  }
+}
+
+/* Responsive typography */
+@layer utilities {
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  /* Ensure touch targets are at least 44px */
+  @media (min-width: 640px) {
+    button, a[role="button"] {
+      min-height: 44px;
+      @apply flex items-center justify-center;
+    }
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  .card-dark {
+    @apply border-primary border-opacity-40;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    @apply !transition-none !animate-none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Dark mode optimization for different browsers */
+@supports (backdrop-filter: blur(1px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Font smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Shimmer animation for portfolio cards */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
